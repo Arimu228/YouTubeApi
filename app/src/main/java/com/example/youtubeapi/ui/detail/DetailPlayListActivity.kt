@@ -12,7 +12,7 @@ class DetailPlayListActivity : BaseActivity< DetailViewModel,ActivityDetailPlayL
     private lateinit var adapter: PLayListsAdapter
 
     private val id: String?
-        get() = intent.getStringExtra("id")
+        get() = intent.getStringExtra(ID)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,6 @@ class DetailPlayListActivity : BaseActivity< DetailViewModel,ActivityDetailPlayL
         }
     }
     private fun onItemClick(list: Item){
-
     }
     companion object {
         const val ID = "id"

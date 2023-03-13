@@ -1,15 +1,9 @@
 package com.example.youtubeapi.ui.playList
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtubeapi.base.BaseActivity
@@ -43,31 +37,6 @@ class PlayListActivity() : BaseActivity<PlayListViewModel, ActivityPlayListMainB
 
 
     private fun checkNetwork() {
-        fun isOnline(context: Context): Boolean {
-            val connectivityManager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (connectivityManager != null) {
-                val capabilities =
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-                    } else {
-                        TODO("VERSION.SDK_INT < M")
-                    }
-                if (capabilities != null) {
-                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                        return true
-                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                        return true
-                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
-                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                        return true
-                    }
-                }
-            }
-            return false
-        }
 
         cld = ConnectionLiveData(application)
         cld.observe(this) { isConnected ->
@@ -90,7 +59,7 @@ class PlayListActivity() : BaseActivity<PlayListViewModel, ActivityPlayListMainB
 
     private fun onItemClick(list:Item){
         Intent(this,DetailPlayListActivity::class.java).apply {
-            putExtra("id",list.id)
+            putExtra(ID,list.id)
             startActivity(this)
         }
     }

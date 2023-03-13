@@ -24,7 +24,7 @@ class Repository {
         val data = MutableLiveData<ItemList>()
         apiServise.getItemsList(
             com.example.youtubeapi.BuildConfig.API_KEY,
-            Constant.part, 5, id
+            Constant.part, 100, id
         ).enqueue(object : Callback<ItemList> {
             override fun onResponse(call: Call<ItemList>, response: Response<ItemList>) {
                 if (response.isSuccessful) {
