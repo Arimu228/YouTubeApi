@@ -17,7 +17,7 @@
         android:theme="@style/Theme.YouTubeApi"
         tools:targetApi="31">
         <activity
-            android:name=".VideoPlayerActivity"
+            android:name=".ui.player.VideoPlayerActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

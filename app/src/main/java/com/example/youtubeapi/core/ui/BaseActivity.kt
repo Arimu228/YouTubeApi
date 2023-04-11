@@ -32,4 +32,5 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewBinding> : AppCompatActivit
     open fun checkInternet() {}
     open fun initViewModel() {}
     open fun observe(){}
+
 }

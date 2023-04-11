@@ -8,19 +8,20 @@ import com.bumptech.glide.Glide
 import com.example.youtubeapi.databinding.ItemPlayListsBinding
 import com.example.youtubeapi.data.remote.model.Item
 
-class PLayListsAdapter( var onItemClick: (Item) -> Unit) :
+class PLayListsAdapter(var onItemClick: (Item) -> Unit) :
     RecyclerView.Adapter<PLayListsAdapter.Viewholder>() {
     private var playLists = arrayListOf<Item>()
 
     inner class Viewholder(private var binding: ItemPlayListsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun onBind(playLists: Item) {
             Glide.with(binding.imagePlayLists).load(playLists.snippet.thumbnails.maxres.url)
                 .into(binding.imagePlayLists)
             binding.textPlayLists.text = playLists.snippet.title
-            binding.descPlayLists.text =playLists.snippet.channelTitle
+            binding.descPlayLists.text = "${playLists.contentDetails.itemCount} video series"
             itemView.setOnClickListener {
-                    onItemClick.invoke(playLists)
+                onItemClick.invoke(playLists)
             }
         }
 
@@ -42,14 +43,8 @@ class PLayListsAdapter( var onItemClick: (Item) -> Unit) :
         notifyDataSetChanged()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setItemList(list: List<Item>) {
-        playLists.addAll(list as ArrayList<Item>)
-        notifyDataSetChanged()
-    }
-
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
-      holder.onBind(playLists[position])
+        holder.onBind(playLists[position])
     }
 
     override fun getItemCount(): Int = playLists.size

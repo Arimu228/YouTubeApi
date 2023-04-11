@@ -15,9 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/playlist"
-            android:textStyle="bold"
             android:textColor="@color/red"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_back"

@@ -7,7 +7,7 @@
     tools:context=".ui.playList.PlayListActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_playList"
+        android:id="@+id/no_inet_container_playList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
@@ -16,21 +16,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/rv_detail_playLists"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_playList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:listitem="@layout/item_play_lists" />
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/rv_detail_playLists"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_play_lists" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ProgressBar
         android:id="@+id/progress_circular"
@@ -39,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_detail_playLists" />
+        app:layout_constraintTop_toTopOf="@+id/container_playList" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

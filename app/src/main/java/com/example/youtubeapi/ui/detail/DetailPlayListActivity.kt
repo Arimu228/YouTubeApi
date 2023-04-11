@@ -3,18 +3,22 @@ package com.example.youtubeapi.ui.detail
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import com.example.youtubeapi.R
 import com.example.youtubeapi.core.network.result.Status.*
 import com.example.youtubeapi.core.ui.BaseActivity
 import com.example.youtubeapi.data.remote.model.Item
 import com.example.youtubeapi.data.remote.model.PlayListInfo
 import com.example.youtubeapi.databinding.ActivityDetailPlayListBinding
 import com.example.youtubeapi.ui.player.VideoPlayerActivity
+import com.example.youtubeapi.ui.utils.ConnectionLiveData
 
 class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayListBinding>() {
     private lateinit var adapter: DetailAdapter
+     private lateinit var cld: ConnectionLiveData
     private val playlistInfo by lazy { intent.getSerializableExtra(ID) as PlayListInfo }
     private var playlistItemData = listOf<Item>()
     private var videosId = arrayListOf<String>()
@@ -24,6 +28,7 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = DetailAdapter(this::onNextButton)
+        checkNetwork()
     }
 
     override fun inflateViewBinding(inflater: LayoutInflater): ActivityDetailPlayListBinding {
@@ -36,6 +41,22 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
 
     }
 
+
+    private fun checkNetwork() {
+
+        cld = ConnectionLiveData(application)
+        cld.observe(this) { isConnected ->
+            if (isConnected) {
+                binding.checkInternet.root.visibility = View.GONE
+                binding.coordinatorLayout.visibility = View.VISIBLE
+            } else {
+                binding.checkInternet.root.visibility = View.VISIBLE
+                binding.coordinatorLayout.visibility = View.GONE
+
+            }
+        }
+    }
+
     override fun observe() {
         super.observe()
         getVideoId()
@@ -44,12 +65,11 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
     private fun setItemList() {
         id?.let { id ->
             viewModel.getItemList(id).observe(this) {
-                binding.rvPlaylist.adapter = adapter
+                binding.rvItems.adapter = adapter
                 it.data?.let { it1 -> adapter.setItemsList(it1.items) }
             }
         }
     }
-
 
     private fun getVideoId() {
         viewModel.getVideosId(playlistItemData)
@@ -73,9 +93,7 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
 
             }
         }
-
     }
-
 
     override fun initListener() {
         binding.toolbar.tvBack.setOnClickListener {
@@ -95,7 +113,6 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
         const val ID = "id"
         const val VIDEOS_KEY = "videos.key"
     }
-
 
 }
 

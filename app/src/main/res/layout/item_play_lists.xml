@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="26dp"
-                    android:text="playlist"
+                    android:text="@string/playlist"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -52,17 +52,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
-<!--    <ImageView-->
-<!--        android:id="@+id/image_playLists"-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/text_playLists"
+     <TextView
+        android:id="@+id/desc_playLists"
         android:layout_width="100dp"
 
         android:layout_height="wrap_content"
@@ -70,10 +63,10 @@
         android:layout_marginEnd="116dp"
         app:layout_constraintBottom_toBottomOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_playLists" />
+        app:layout_constraintTop_toBottomOf="@+id/text_playLists" />
 
     <TextView
-        android:id="@+id/desc_playLists"
+        android:id="@+id/text_playLists"
         android:layout_width="100dp"
 
         android:layout_height="wrap_content"
