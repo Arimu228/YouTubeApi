@@ -2,4 +2,19 @@
     <string name="app_name">YouTubeApi</string>
     <string name="try_again">try again</string>
     <string name="hello">hello</string>
+    <string name="playlist">Playlist</string>
+    <string name="back">back</string>
+    <string name="emotional_well_being_healing_practices_for_children"><![CDATA[Emotional Well-being & Healing Practices for Children]]></string>
+    <string name="no_internet">No Internet</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="emotional"><![CDATA[Emotional Well-being & Healing Practices for Children]]></string>
+    <string name="_32_video_series">32 video series</string>
+    <string name="preview_for_videos">preview for videos</string>
+    <string name="in_this_series">In this series, we break down the impact of displacement, instability, violence, and trauma in children, and offer exercises to support children in their healing journey.</string>
+    <string name="playlist_">Playlist</string>
+    <string name="video_series">video series</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="play_button">play button</string>
+    <string name="lorem">lorem</string>
+    <string name="for_image">for image</string>
 </resources>

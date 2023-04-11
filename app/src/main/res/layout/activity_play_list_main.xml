@@ -6,28 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".ui.playList.PlayListActivity">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/container_playList"
-    android:layout_width="match_parent"
-    android:visibility="gone"
-    android:layout_height="match_parent">
-<include layout="@layout/no_internet_activity"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_playList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include layout="@layout/no_internet_activity" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_playLists"
+
+        android:id="@+id/rv_detail_playLists"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/item_play_lists" />
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="@+id/rv_detail_playLists" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

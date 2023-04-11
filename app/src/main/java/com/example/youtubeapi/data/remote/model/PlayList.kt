@@ -1,5 +1,7 @@
-package com.example.youtubeapi.model
-
+package com.example.youtubeapi.data.remote.model
+data class Playlist(
+    val items: List<Item>,
+)
 data class PlayList(
     val etag: String,
     val items: List<Item>,
@@ -77,6 +79,7 @@ data class Default(
     val width: Int
 )
 data class ContentDetails(
-    val itemCount: Int
+    val itemCount: Int,
+    val videoId : String
 )
 
