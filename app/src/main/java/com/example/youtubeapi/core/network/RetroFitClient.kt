@@ -15,7 +15,6 @@ class RetroFitClient {
         fun create(): ApiServise {
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
             val okHttpClient = OkHttpClient.Builder()
                 .writeTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
