@@ -7,19 +7,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.example.youtubeapi.R
 import com.example.youtubeapi.core.network.result.Status.*
 import com.example.youtubeapi.core.ui.BaseActivity
 import com.example.youtubeapi.data.remote.model.Item
-import com.example.youtubeapi.data.remote.model.PlayListInfo
+
 import com.example.youtubeapi.databinding.ActivityDetailPlayListBinding
 import com.example.youtubeapi.ui.player.VideoPlayerActivity
 import com.example.youtubeapi.ui.utils.ConnectionLiveData
 
 class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayListBinding>() {
-    private lateinit var adapter: DetailAdapter
-     private lateinit var cld: ConnectionLiveData
-    private val playlistInfo by lazy { intent.getSerializableExtra(ID) as PlayListInfo }
+    private var adapter: DetailAdapter? = null
+    private lateinit var cld: ConnectionLiveData
     private var playlistItemData = listOf<Item>()
     private var videosId = arrayListOf<String>()
     private val id: String?
@@ -59,14 +57,14 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
 
     override fun observe() {
         super.observe()
-        getVideoId()
+        setVideoId()
     }
 
     private fun setItemList() {
         id?.let { id ->
             viewModel.getItemList(id).observe(this) {
                 binding.rvItems.adapter = adapter
-                it.data?.let { it1 -> adapter.setItemsList(it1.items) }
+                it.data?.let { it1 -> adapter?.setItemsList(it1.items) }
             }
         }
     }
@@ -79,18 +77,26 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
     }
 
     private fun setVideoId() {
-        viewModel.getItemList(playlistInfo.id).observe(this) {
-            when (it.status) {
-                SUCCESS -> {
-                    playlistItemData = it.data!!.items
-                    getVideoId()
-                    adapter.setItemsList(playlistItemData)
-                }
-                ERROR -> {
-                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                }
-                LOADING -> TODO()
+        viewModel.loading.observe(this) {
+            binding.progressCircular.isVisible = it
+        }
 
+        id?.let { id ->
+            viewModel.getItemList(id).observe(this) {
+                when (it.status) {
+                    SUCCESS -> {
+                        viewModel.loading.postValue(false)
+                        playlistItemData = it.data!!.items
+                        getVideoId()
+                        adapter?.setItemsList(playlistItemData)
+                    }
+                    ERROR -> {
+                        Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    LOADING -> viewModel.loading.postValue(true)
+
+
+                }
             }
         }
     }
@@ -101,13 +107,15 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
         }
     }
 
-    private fun onNextButton(videoId: Int) {
+    private fun onNextButton(item: Item) {
         Intent(this, VideoPlayerActivity::class.java).apply {
-            putExtra(VIDEOS_KEY, videoId)
-            putExtra(VIDEOS_KEY, videosId)
+            putExtra(VIDEOS_KEY, item.id)
+            putExtra(VIDEOS_KEY, item.snippet.title)
+            putExtra(VIDEOS_KEY, item.snippet.description)
             startActivity(this)
         }
     }
+
 
     companion object {
         const val ID = "id"

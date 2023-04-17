@@ -1,5 +1,5 @@
 package com.example.youtubeapi.data.remote.model
-data class Playlist(
+data class PlaylistItem(
     val items: List<Item>,
 )
 data class PlayList(
@@ -65,7 +65,8 @@ data class Item(
     val etag: String,
     val id: String,
     val kind: String,
-    val snippet: Snippet
+    val snippet: Snippet,
+    val items:List<Item>
 )
 
 data class High(

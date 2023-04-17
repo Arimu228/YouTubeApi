@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.playList.PlayListActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/no_inet_container_playList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/no_inet_container_playList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-        <include layout="@layout/no_internet_activity" />
+            <include layout="@layout/no_internet_activity" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_playList"

@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.youtubeapi.data.remote.model.Item
 import com.example.youtubeapi.databinding.DetailItemListBinding
-import kotlin.reflect.KFunction1
 
-class DetailAdapter(private val onNextClick: KFunction1<Int, Unit>) :
+class DetailAdapter( val onNextClick: (Item) -> Unit) :
     RecyclerView.Adapter<DetailAdapter.DetailViewHolder>() {
     private var items = arrayListOf<Item>()
 
@@ -20,6 +19,9 @@ class DetailAdapter(private val onNextClick: KFunction1<Int, Unit>) :
             Glide.with(binding.imageDetail).load(item.snippet.thumbnails.medium.url)
                 .into(binding.imageDetail)
             binding.textDetail.text = item.snippet.title
+            itemView.setOnClickListener {
+                onNextClick(item)
+            }
         }
     }
 
@@ -36,8 +38,8 @@ class DetailAdapter(private val onNextClick: KFunction1<Int, Unit>) :
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItemsList(list: List<Item>) {
+        items.clear()
         items.addAll(list)
-
         notifyDataSetChanged()
     }
 

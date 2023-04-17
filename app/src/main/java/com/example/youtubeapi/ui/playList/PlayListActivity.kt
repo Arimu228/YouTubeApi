@@ -61,7 +61,7 @@ class PlayListActivity : BaseActivity<PlayListViewModel, ActivityPlayListMainBin
                     binding.rvDetailPlayLists.layoutManager = LinearLayoutManager(this)
                     binding.rvDetailPlayLists.adapter = adapter
                     viewModel.loading.postValue(false)
-                    it.data?.let { it1 -> adapter?.setPlayList(it1.items) }
+                    it.data?.let { it1 -> adapter?.setPlayList(it1. items) }
                 }
                 Status.ERROR -> {
                     binding.progressCircular.isVisible = false

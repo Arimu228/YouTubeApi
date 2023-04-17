@@ -1,5 +1,6 @@
 package com.example.youtubeapi.ui.utils
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
@@ -14,6 +15,7 @@ class ConnectionLiveData(private val connectiveManager: ConnectivityManager) : L
         application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     )
 
+    @SuppressLint("ObsoleteSdkInt")
     private val networkCallBack = @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     object : ConnectivityManager.NetworkCallback() {
         override fun onAvailable(network: Network) {
@@ -28,13 +30,13 @@ class ConnectionLiveData(private val connectiveManager: ConnectivityManager) : L
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
     override fun onActive() {
         val builder = NetworkRequest.Builder()
         connectiveManager.registerNetworkCallback(builder.build(), networkCallBack)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+
     override fun onInactive() {
         super.onInactive()
         connectiveManager.unregisterNetworkCallback(networkCallBack)
