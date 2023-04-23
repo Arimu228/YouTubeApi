@@ -1,7 +1,6 @@
 package com.example.youtubeapi.data.remote.remoteDataSource
 
 import com.example.youtubeapi.core.network.BaseDataSource
-import com.example.youtubeapi.core.network.RetroFitClient
 import com.example.youtubeapi.core.network.result.Resource
 import com.example.youtubeapi.data.remote.ApiServise
 import com.example.youtubeapi.data.remote.model.Item
@@ -9,11 +8,13 @@ import com.example.youtubeapi.data.remote.model.ItemList
 import com.example.youtubeapi.data.remote.model.PlayList
 
 import com.example.youtubeapi.ui.utils.Constant
+import org.koin.dsl.module
 
-class RemoteDataSource : BaseDataSource() {
-    private val apiServise: ApiServise by lazy {
-        RetroFitClient.create()
-    }
+val remoteDataSource = module {
+    factory { RemoteDataSource(get()) }
+}
+
+class RemoteDataSource(private val apiServise: ApiServise ) : BaseDataSource() {
 
     suspend fun getPlaylist(): Resource<PlayList> = getResult {
         apiServise.getPlayList(

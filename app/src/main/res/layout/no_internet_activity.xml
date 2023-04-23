@@ -25,7 +25,8 @@
         app:layout_constraintBottom_toTopOf="@+id/view_line"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintVertical_bias="0.3"
+        android:contentDescription="@string/playlist" />
 
     <ImageView
         android:id="@+id/no_internet"
@@ -36,7 +37,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/playlist" />
 
     <Button
         android:id="@+id/try_again"

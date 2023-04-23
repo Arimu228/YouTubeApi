@@ -39,48 +39,51 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/detail_toolbar">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar"
+                android:paddingHorizontal="@dimen/dp16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/light_gray"
                 android:theme="@style/Theme.Design.Light.NoActionBar">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/dp16"
                     android:fitsSystemWindows="true"
                     app:contentScrim="@color/black"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:paddingHorizontal="@dimen/page_padding"
                         android:paddingVertical="@dimen/padding_vertical"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_title_detail"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
 
-                            android:maxLines="2"
+                            android:maxLines="4"
                             android:textColor="@color/black"
                             android:textSize="@dimen/tv_playlist_text_size"
                             tools:text="@string/emotional" />
 
                         <TextView
                             android:id="@+id/tv_description"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8dp"
 
-                            android:maxLines="5"
+                            android:maxLines="6"
                             android:textColor="@color/black"
                             android:textSize="@dimen/tv_desc_text_size"
                             tools:ignore="VisualLintLongText"
@@ -93,7 +96,7 @@
                             android:layout_marginTop="@dimen/_12dp"
                             android:maxLines="5"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_8sp"
+                            android:textSize="16sp"
                             tools:ignore="VisualLintLongText"
                             tools:text="@string/video_series" />
 
@@ -131,8 +134,8 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"
+            android:id="@+id/detail_toolbar"
+            layout="@layout/detail_toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -143,7 +146,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar">
+            app:layout_constraintTop_toTopOf="@+id/detail_toolbar">
 
             <ProgressBar
                 android:id="@+id/progress_circular"

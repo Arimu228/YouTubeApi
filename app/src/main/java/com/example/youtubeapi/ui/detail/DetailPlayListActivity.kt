@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
 import com.example.youtubeapi.core.network.result.Status.*
 import com.example.youtubeapi.core.ui.BaseActivity
 import com.example.youtubeapi.data.remote.model.Item
-
 import com.example.youtubeapi.databinding.ActivityDetailPlayListBinding
-import com.example.youtubeapi.ui.player.VideoPlayerActivity
+import com.example.youtubeapi.ui.video.VideoPlayerActivity
 import com.example.youtubeapi.ui.utils.ConnectionLiveData
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayListBinding>() {
     private var adapter: DetailAdapter? = null
@@ -21,24 +20,19 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
     private var playlistItemData = listOf<Item>()
     private var videosId = arrayListOf<String>()
     private val id: String?
-        get() = intent.getStringExtra(ID)
+        get() = intent.getStringExtra(DETAIL_ID)
 
+    override val viewModel: DetailViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         adapter = DetailAdapter(this::onNextButton)
         checkNetwork()
+        setItemList()
     }
 
     override fun inflateViewBinding(inflater: LayoutInflater): ActivityDetailPlayListBinding {
         return ActivityDetailPlayListBinding.inflate(inflater)
     }
-
-    override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[DetailViewModel::class.java]
-        setItemList()
-
-    }
-
 
     private fun checkNetwork() {
 
@@ -80,13 +74,13 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
         viewModel.loading.observe(this) {
             binding.progressCircular.isVisible = it
         }
-
         id?.let { id ->
             viewModel.getItemList(id).observe(this) {
                 when (it.status) {
                     SUCCESS -> {
                         viewModel.loading.postValue(false)
-                        playlistItemData = it.data!!.items
+                        setData(it.data!!.items[0])
+                        playlistItemData = it.data.items
                         getVideoId()
                         adapter?.setItemsList(playlistItemData)
                     }
@@ -94,15 +88,21 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
                         Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                     }
                     LOADING -> viewModel.loading.postValue(true)
-
-
                 }
             }
         }
     }
 
+    private fun setData(data: Item) {
+        with(binding) {
+            tvTitleDetail.text = data.snippet.title
+            tvDescription.text = data.snippet.description
+            tvVideoCount.text = data.contentDetails.itemCount.toString()
+        }
+    }
+
     override fun initListener() {
-        binding.toolbar.tvBack.setOnClickListener {
+        binding.detailToolbar.tvBack.setOnClickListener {
             finish()
         }
     }
@@ -116,9 +116,8 @@ class DetailPlayListActivity : BaseActivity<DetailViewModel, ActivityDetailPlayL
         }
     }
 
-
     companion object {
-        const val ID = "id"
+        const val DETAIL_ID = "id"
         const val VIDEOS_KEY = "videos.key"
     }
 

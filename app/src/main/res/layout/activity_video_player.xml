@@ -5,19 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.player.VideoPlayerActivity">
+    tools:context=".ui.video.VideoPlayerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">
+
         <include
             android:id="@+id/checkInternet"
-            layout="@layout/no_internet_activity"
-            />
+            layout="@layout/no_internet_activity" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,16 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
-
         <include
-            android:id="@+id/include_toolbar"
-            layout="@layout/toolbar"
+            android:id="@+id/toolbar_back"
+            layout="@layout/detail_toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="680dp"
@@ -49,27 +47,34 @@
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:keepScreenOn="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:show_shuffle_button="false"
             app:use_controller="true" />
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="328dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:text="@string/title_text"
+            android:layout_marginTop="40dp"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:text="@string/hello"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exo_player" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView_download"
             android:layout_width="142dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
             app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="8sp">
+            app:cardCornerRadius="8sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -90,36 +95,41 @@
                 android:src="@drawable/ic_baseline_download_24" />
         </androidx.cardview.widget.CardView>
 
+
+        <Button
+            android:id="@+id/fullscreen"
+            android:layout_width="35dp"
+            android:layout_height="31dp"
+            android:background="@drawable/ic_baseline_fullscreen_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardView_download"
+            app:layout_constraintTop_toTopOf="@+id/cardView_download" />
+
         <TextView
             android:id="@+id/tv_info_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/detail_text"
+            android:layout_marginTop="36dp"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:text="@string/hello"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_download" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
